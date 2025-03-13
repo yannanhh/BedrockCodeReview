@@ -21,7 +21,7 @@ jobs:
       - name: Configure AWS credentials to use AWS Bedrock models
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
-          role-to-assume: ${{ secrets.ROLE_ARN }}
+          role-to-assume: "arn:aws:iam::093575270853:role/GitHubAction-AssumeRoleWithAction"
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
 
@@ -59,8 +59,6 @@ jobs:
 
             commit=$(git rev-parse HEAD)
             escaped_output=$(jq -n --arg val "$output" '$val')
-            body="{\"commit\":\"$commit\",\"feedback\":$escaped_output}"
-            curl -X POST -H "Content-Type: application/json" -d "$body" 
 
             metrics_prompt="
             Below is a code review feedback,
@@ -87,4 +85,4 @@ jobs:
             exit 1
           fi
         env:
-          BUCKET_AND_PREFIX: ${{ secrets.BUCKET_AND_PREFIX }}
+          BUCKET_AND_PREFIX: "yannanab2"
