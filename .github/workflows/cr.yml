@@ -52,8 +52,7 @@ jobs:
 
           [Rule ID]: <rule-id>
           Invalid Code:
-          ```python
-          # problematic code here
+          ```problematic code here```
 
           <diff>
           $diff
