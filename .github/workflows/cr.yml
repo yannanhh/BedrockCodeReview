@@ -42,11 +42,15 @@ jobs:
 
           prompt="
           You are a coding expert.
-          according to the rules in pyguide.md, the suggestion should include the rule id from the style file, the invalid source code from the original python code file, and the improvement suggestions (e.g. code example). if there is no suggestions for a rule, just skip that rule in the output, don't include 'no suggestion' to the output. if there is no suggestions for the whole file, write 'no suggestions' to the output. don't modify the original python code and the style file.
+          according to the rules
+          <rules>
+          `cat pyguide.md`
+          </rules>
 
-          If you think the code is correct, output 'OK' with nothing else.
-          Otherwise, output suggestions in markdown format.
-
+          If you think the code below conforms to the rules, output 'OK' with nothing else.
+          Otherwise, for each rule in rules (from 2.1 onwards), analyze the code and provide feedback in the following format:
+          Rule <number>: <rule name>
+ 
           <diff>
           $diff
           </diff>
