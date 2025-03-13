@@ -41,18 +41,15 @@ jobs:
           diff=$(cat diff)
 
           prompt="
-          You are a coding expert. Review the following code according to the rules in pyguide.md. 
+          You are a coding expert. Review the following code according to the rules in pyguide.md.md, the 
+          suggestion should include the rule id from the style file, the invalid source code from the original python code file, and the improvement suggestions (e.g. code example). if there is no suggestions for a rule, just skip that rule in the output, don't include 'no suggestion' to the output. if there is no suggestions for the whole file, write 'no suggestions' to the output. don't modify the original python code and the style file.
+          
+          <guideline>
+          `cat pyguide.md`
+          </guideline>
 
-          For each issue found, provide:
-          1. Rule ID from the style guide
-          2. The specific code snippet that violates the rule
-          3. Concrete improvement suggestion with example code
-
-          Format your response as follows:
-
-          [Rule ID]: <rule-id>
-          Invalid Code:
-          ```problematic code here```
+          If you think the code is correct, output 'OK' with nothing else.
+          Otherwise, output suggestions in markdown format.
 
           <diff>
           $diff
