@@ -87,4 +87,4 @@ jobs:
             exit 1
           fi
         env:
-          BUCKET_AND_PREFIX: ${{ secrets.BUCKET_AND_PREFIX }}
+          BUCKET_AND_PREFIX: "yannanab2"
