@@ -45,7 +45,15 @@ jobs:
           If you think the code below conforms to the rules, output 'OK' with nothing else.
           Otherwise, for each rule in rules (from 2.1 onwards), analyze the code and provide feedback in the following format:
           Rule <number>: <rule name>
- 
+          Original:
+          \`\`\`python
+          problematic code here
+          \`\`\`
+          Suggestion:
+          \`\`\`python
+          improved code here
+          \`\`\`
+
           <code>
           `cat tutorial/spiders/bug.py`
           </code>
