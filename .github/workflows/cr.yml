@@ -38,17 +38,18 @@ jobs:
 
       - name: Review the diff
         run: |
+          diff=$(cat diff)
 
           prompt="
-          You are a coding expert. Review the entire repo according to the rules in pyguide.md, the 
-          suggestion should include the rule id from the style file, the invalid source code from the original python code file, and the improvement suggestions (e.g. code example). if there is no suggestions for a rule, just skip that rule in the output, don't include 'no suggestion' to the output. if there is no suggestions for the whole file, write 'no suggestions' to the output. don't modify the original python code and the style file.
-          
-          <guideline>
-          `cat pyguide.md`
-          </guideline>
+          You are a coding expert.
+          Review the following code diff and give me suggestions.
 
           If you think the code is correct, output 'OK' with nothing else.
           Otherwise, output suggestions in markdown format.
+
+          <diff>
+          $diff
+          </diff>
           "
 
           output=$(./defect --schema=bedrock --model=us.anthropic.claude-3-5-sonnet-20241022-v2:0 "$prompt")
