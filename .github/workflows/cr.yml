@@ -32,8 +32,13 @@ jobs:
           rm defect-v0.3.1-x86_64-unknown-linux-musl.zip
           chmod +x defect
 
-      - name: Review the bug
+      - name: Get the diff of the latest commit
         run: |
+          git diff -U100 HEAD^ HEAD > diff
+
+      - name: Review the diff
+        run: |
+          diff=$(cat diff)
 
           prompt="
           You are a coding expert.
@@ -53,10 +58,10 @@ jobs:
           \`\`\`python
           improved code here
           \`\`\`
-
-          <code>
-          `cat tutorial/spiders/bug.py`
-          </code>
+ 
+          <diff>
+          $diff
+          </diff>
           "
 
           output=$(./defect --schema=bedrock --model=us.anthropic.claude-3-5-sonnet-20241022-v2:0 "$prompt")
