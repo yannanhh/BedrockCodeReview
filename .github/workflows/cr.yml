@@ -32,13 +32,8 @@ jobs:
           rm defect-v0.3.1-x86_64-unknown-linux-musl.zip
           chmod +x defect
 
-      - name: Get the diff of the latest commit
+      - name: Review the bug
         run: |
-          git diff -U100 HEAD^ HEAD > diff
-
-      - name: Review the diff
-        run: |
-          diff=$(cat diff)
 
           prompt="
           You are a coding expert.
@@ -51,9 +46,9 @@ jobs:
           Otherwise, for each rule in rules (from 2.1 onwards), analyze the code and provide feedback in the following format:
           Rule <number>: <rule name>
  
-          <diff>
-          $diff
-          </diff>
+          <code>
+          `cat tutorial/spiders/bug.py`
+          </code>
           "
 
           output=$(./defect --schema=bedrock --model=us.anthropic.claude-3-5-sonnet-20241022-v2:0 "$prompt")
